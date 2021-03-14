@@ -7,7 +7,9 @@ phases:
       - aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 855222562787.dkr.ecr.ap-southeast-1.amazonaws.com
   build:
     commands:
-      - docker build -t mnaustria-tier-3-ecr -f express-minapp/Dockerfile .
+      - pwd
+      - cd express-minapp
+      - docker build -t mnaustria-tier-3-ecr .
       - docker tag mnaustria-tier-3-ecr:latest 855222562787.dkr.ecr.ap-southeast-1.amazonaws.com/mnaustria-tier-3-ecr:latest
   post_build:
     commands:

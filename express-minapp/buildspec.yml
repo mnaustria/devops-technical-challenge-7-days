@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 855222562787.dkr.ecr.ap-southeast-1.amazonaws.com
+  build:
+    commands:
+      - docker build -t mnaustria-tier-3-ecr .
+      - docker tag mnaustria-tier-3-ecr:latest 855222562787.dkr.ecr.ap-southeast-1.amazonaws.com/mnaustria-tier-3-ecr:latest
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push 855222562787.dkr.ecr.ap-southeast-1.amazonaws.com/mnaustria-tier-3-ecr:latest
+      - printf '[{"name":"express-miniapp","imageUri":"855222562787.dkr.ecr.ap-southeast-1.amazonaws.com/mnaustria-tier-3-ecr:latest"}]' > imagedefinitions.json
+      - cat imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
+  discard-path: no

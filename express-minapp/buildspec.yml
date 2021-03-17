@@ -21,5 +21,5 @@ phases:
 
 artifacts:
   files:
-    - */imagedefinitions.json
+    - "**/imagedefinitions.json"
   discard-path: no

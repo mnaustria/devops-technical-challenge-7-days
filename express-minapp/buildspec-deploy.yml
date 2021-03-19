@@ -23,8 +23,10 @@ phases:
       # - sed -i 's|$PASSWORD|'"$PASSWORD"'|g' manifest.yaml
       # - sed -i 's|$DATABASE|'"$DATABASE"'|g' manifest.yaml
       # - cat manifest.yaml
-      - cat ../deployment-app.yaml
-      - kubectl apply -f ../deployment-app.yaml
+      - ls -la
+      - pwd
+      - cat express-minapp/deployment-app.yaml
+      - kubectl apply -f express-minapp/deployment-app.yaml
   post_build:
     commands:
       - echo Build completed on `date`

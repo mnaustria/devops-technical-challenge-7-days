@@ -1,0 +1,73 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: express-minapp-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              serviceName: express-minapp-service
+              servicePort: 80
+          - path: /health
+            pathType: Prefix
+            backend:
+              serviceName: express-minapp-service
+              servicePort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: express-minapp-service
+spec:
+  selector:
+    app.kubernetes.io/name: express-minapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 1337
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: express-minapp-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: express-minapp
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: express-minapp
+    spec:
+      containers:
+        - name: express-minapp
+          image: 855222562787.dkr.ecr.ap-southeast-1.amazonaws.com/mnaustria-tier-3-ecr:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 1337
+          env:
+            - name: HOST
+              value: 'testmnaustria-dev-mysql.cbxa73kcxrhn.ap-southeast-1.rds.amazonaws.com'
+            - name: USERNAME
+              value: 'admin'
+            - name: PASSWORD
+              value: 'U,<l-IGxf*O3q|&$'
+            - name: DATABASE
+              value: 'testmnaustriadevDB'
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "128Mi"
+            limits:
+              cpu: "200m"
+              memory: "500Mi"

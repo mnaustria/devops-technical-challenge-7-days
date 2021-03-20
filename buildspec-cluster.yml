@@ -9,7 +9,7 @@ phases:
       - mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
       - echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
       - yum install -y awscli tar wget gzip make jq gettext bash-completion moreutils
-      - curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$'uname -s'_amd64.tar.gz" | tar xz -C /tmp
+      - curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
       - mv -v /tmp/eksctl /usr/local/bin
       - eksctl completion bash >> ~/.bash_completion
   pre_build:

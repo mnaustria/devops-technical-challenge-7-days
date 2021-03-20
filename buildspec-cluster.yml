@@ -41,6 +41,7 @@ phases:
         s!config_ng_cap!'$NODE_GROUP_CAP'!; 
         s!config_kms_arn!'$KMS_ARN'!' kubernetes/cluster-config.yaml
       - cat kubernetes/cluster-config.yaml
+      - eksctl create cluster -f kubernetes/cluster-config.yaml
   post_build:
     commands:
       - echo Build completed on `date`

@@ -20,13 +20,6 @@ phases:
       - echo Entered the pre_build phase...
       - echo Logging in to Amazon EKS...
       - kubectl version --short --client
-      - ls -la
-      - pwd
-      # - aws eks --region ap-southeast-1 update-kubeconfig --name eks-cluster --role-arn arn:aws:iam::855222562787:role/eksworkshop-admin
-  build:
-    commands:
-      # - make
-      # - kubectl get nodes
       - | 
         sed -i 's!config_cluster_name!'$CLUSTER_NAME'!; 
         s!config_aws_region!'$AWS_REGION'!; 
@@ -41,7 +34,19 @@ phases:
         s!config_ng_cap!'$NODE_GROUP_CAP'!; 
         s!config_kms_arn!'$KMS_ARN'!' kubernetes/cluster-config.yaml
       - cat kubernetes/cluster-config.yaml
+      - 
+  build:
+    commands:
       - eksctl create cluster -f kubernetes/cluster-config.yaml
+      - kubectl get nodes
+      - | 
+        sed -i 's!def-cluster-name!'$CLUSTER_NAME'!; 
+        s!def-aws-region!'$AWS_REGION'!; 
+        s!def-vpc-id!'$VPC'!; 
+      - cat kubernetes/ingress/alb-ingress-rbac.yaml
+      - kubectl apply -f kubernetes/ingress/alb-ingress-rbac.yaml
+      - kubectl get all -n kube-system
+
   post_build:
     commands:
       - echo Build completed on `date`

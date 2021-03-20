@@ -28,18 +28,18 @@ phases:
       # - make
       # - kubectl get nodes
       - | 
-        sed 's!config_cluster_name!$'CLUSTER_NAME''!; \
-        s!config_aws_region!$'AWS_REGION'!; \
-        s!config_tag_environment!$'ENV'!; \
-        s!config_tag_owner!$'OWNER'!; \
-        s!config_tag_team!$'TEAM'!; \
-        s!config_alb_policy_arn!$'ALB_INGRESS_POLICY_ARN'!; \
-        s!config-sub_priv_a!$'PRIVATE_SUB_A'!; \
-        s!config-sub_priv_b!$'PRIVATE_SUB_B'!; \
-        s!config-sub_pub_a!$'PUBLIC_SUB_A'!; \
-        s!config-sub_pub_b!$'PUBLIC_SUB_B'!; \
-        s!config_ng_cap!$'NODE_GROUP_CAP'!; \
-        s!config_kms_arn!$'KMS_ARN'!' kubernetes/cluster-config.yaml
+        sed -i 's!config_cluster_name!'$CLUSTER_NAME'!; \
+        s!config_aws_region!'$AWS_REGION'!; \
+        s!config_tag_environment!'$ENV'!; \
+        s!config_tag_owner!'$OWNER'!; \
+        s!config_tag_team!'$TEAM'!; \
+        s!config_alb_policy_arn!'$ALB_INGRESS_POLICY_ARN'!; \
+        s!config-sub_priv_a!'$PRIVATE_SUB_A'!; \
+        s!config-sub_priv_b!'$PRIVATE_SUB_B'!; \
+        s!config-sub_pub_a!'$PUBLIC_SUB_A'!; \
+        s!config-sub_pub_b!'$PUBLIC_SUB_B'!; \
+        s!config_ng_cap!'$NODE_GROUP_CAP'!; \
+        s!config_kms_arn!'$KMS_ARN'!' kubernetes/cluster-config.yaml
       - cat kubernetes/cluster-config.yaml
   post_build:
     commands:

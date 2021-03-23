@@ -51,19 +51,19 @@ spec:
     spec:
       containers:
         - name: express-minapp
-          image: 855222562787.dkr.ecr.ap-southeast-1.amazonaws.com/mnaustria-tier-3-ecr:v3
+          image: 485323199507.dkr.ecr.ap-southeast-1.amazonaws.com/mnaustria-tier-3-ecr:v3
           imagePullPolicy: Always
           ports:
             - containerPort: 1337
           env:
             - name: HOST
-              value: 'testmnaustria-dev-mysql.cbxa73kcxrhn.ap-southeast-1.rds.amazonaws.com'
+              value: 'mnaustria-dev-mysql.cqnomkdi58mx.ap-southeast-1.rds.amazonaws.com'
             - name: USERNAME
               value: 'admin'
             - name: PASSWORD
-              value: 'U,<l-IGxf*O3q|&$'
+              value: 'Cn-?Fa6Iz+dQWp>p'
             - name: DATABASE
-              value: 'testmnaustriadevDB'
+              value: 'mnaustriadevDB'
           resources:
             requests:
               cpu: "10m"

@@ -13,16 +13,10 @@ phases:
     commands:
       - echo Entered the pre_build phase...
       - echo Logging in to Amazon EKS...
-      - aws eks --region ap-southeast-1 update-kubeconfig --name eks-cluster --role-arn arn:aws:iam::855222562787:role/eksworkshop-admin
+      - aws eks --region $REGION update-kubeconfig --name eks-cluster --role-arn $EKS_ADMIN_ROLE
       - kubectl version --short --client
   build:
     commands:
-      # - echo Build started on `date`
-      # - sed -i 's|$HOST|'"$HOST"'|g' manifest.yaml
-      # - sed -i 's|$USERNAME|'"$USERNAME"'|g' manifest.yaml
-      # - sed -i 's|$PASSWORD|'"$PASSWORD"'|g' manifest.yaml
-      # - sed -i 's|$DATABASE|'"$DATABASE"'|g' manifest.yaml
-      # - cat manifest.yaml
       - ls -la
       - pwd
       - cat express-minapp/deployment-app.yaml

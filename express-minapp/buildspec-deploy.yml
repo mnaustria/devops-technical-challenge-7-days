@@ -12,8 +12,9 @@ phases:
   pre_build:
     commands:
       - echo Entered the pre_build phase...
-      - echo Logging in to Amazon EKS...
-      - aws eks --region $REGION update-kubeconfig --name eksctl-$CLUSTER_NAME-cluster --role-arn $EKS_ADMIN_ROLE
+      - echo Logging in to Amazon EKS... 
+      - echo Config $$CLUSTER_NAME $REGION $EKS_ADMIN_ROLE
+      - aws eks --region $REGION update-kubeconfig --name $CLUSTER_NAME --role-arn $EKS_ADMIN_ROLE
       - kubectl version --short --client
   build:
     commands:

@@ -57,13 +57,13 @@ spec:
             - containerPort: 1337
           env:
             - name: HOST
-              value: 'apper-dev-mysql.cqnomkdi58mx.ap-southeast-1.rds.amazonaws.com'
+              value: $HOST
             - name: USERNAME
-              value: 'admin'
+              value: $USERNAME
             - name: PASSWORD
-              value: 'j>3he6MOQ]5u]1ug'
+              value: $PASSWORD
             - name: DATABASE
-              value: 'apperdevDB'
+              value: $DATABASE
           resources:
             requests:
               cpu: "10m"

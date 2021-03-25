@@ -18,8 +18,10 @@ phases:
       - kubectl version --short --client
   build:
     commands:
-      - ls -la
-      - pwd
+      - sed -i 's|$HOST|'"$HOST"'|g' express-minapp/deployment-app.yaml
+      - sed -i 's|$USERNAME|'"$USERNAME"'|g' express-minapp/deployment-app.yaml
+      - sed -i 's|$PASSWORD|'"$PASSWORD"'|g' express-minapp/deployment-app.yaml
+      - sed -i 's|$DATABASE|'"$DATABASE"'|g' express-minapp/deployment-app.yaml
       - cat express-minapp/deployment-app.yaml
       - kubectl apply -f express-minapp/deployment-app.yaml
   post_build:

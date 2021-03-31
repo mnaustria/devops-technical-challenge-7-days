@@ -51,7 +51,7 @@ spec:
     spec:
       containers:
         - name: express-minapp
-          image: $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$IMAGE_REPO_NAME:1.0.0
+          image: $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$IMAGE_REPO_NAME:1.0.1
           imagePullPolicy: Always
           ports:
             - containerPort: 1337

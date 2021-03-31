@@ -11,11 +11,11 @@ app.use(morgan('common'))
 app.use(cors())
 
 app.get('/', (req, res) => {
-  res.json({message: `Welcome Sailor! You're home! From Github V3`})
+  res.json({message: `Welcome Sailor! You're home! From Github V5`})
 })
 
 app.get('/health', (req, res) => {
-  res.json({message: `Our ship is healthy captain! From Github V3`})
+  res.json({message: `Our ship is healthy captain! From Github V5`})
 })
 
 // specific error handler - not found
